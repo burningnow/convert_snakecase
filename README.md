@@ -8,5 +8,6 @@ snakecase java springboot
 2. SELECT 제외하고 컬럼영역부터 shift + end 눌러서 끝까지 복사
 
 3. 아래 원본 영역에 붙여놓고, 변환 버튼 누르기
+ └ 3.1. sampleVoName 입력란을 바꾸면, 반영해서 변환!
 
-3.1. sampleVoName 입력란을 바꾸면, 반영해서 변환!
+sample sit : https://burningnow.com/503
