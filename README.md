@@ -12,3 +12,6 @@ snakecase java springboot
 4. sampleVoName 입력란을 바꾸면, 반영해서 변환!
 
 sample site : https://burningnow.com/503
+
+![dbeaver_select_sample](https://github.com/burningnow/convert_snakecase/assets/63777624/8b1b3925-9397-4ef2-b3a9-9ff9dd69eb33)
+
