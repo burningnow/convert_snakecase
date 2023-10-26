@@ -11,4 +11,4 @@ snakecase java springboot
 
 4. sampleVoName 입력란을 바꾸면, 반영해서 변환!
 
-sample site : (https://burningnow.com/503){target="_blank"}
+sample site : https://burningnow.com/503
