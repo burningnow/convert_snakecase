@@ -1,0 +1,139 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Java SpringBoot Convert Viewer</title>
+<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+<style type="text/css">
+ul { list-style:none; margin:0; padding:0;}
+li { float:left; margin:0 10px; width:23%; height:400px; margin-bottom:40px; }
+</style>
+</head>
+<body>
+
+<h1>Java SpringBoot Convert Viewer - ⓒ burningnow</h1>
+
+<div class="tab">
+  <img src="dbeaver_select.png" style="width:900px;cursor:pointer;" onClick="window.open('dbeaver_select.png')" />
+	<h2>MODEL, VO <button type="button" onClick="convertBtn();"><strong style="color:red;">변환</strong></button> | <strong>res 용도 sampleVoName 입력란:</strong> <input type="text" id="sampleVo" value="sampleVo" /> <button type="button" onClick="convertBtn();"><strong style="color:red;">변환</strong></button></h2>
+	<div>
+    <ul style="text-align:vertical-align;">
+      <li>
+        <strong>원본<strong><span> select구문을 아래칸에 넣고, <strong style="color:red;">변환</strong> 버튼 클릭</span><br />
+        
+        <textarea id="orgText" style="width:98%;height:400px;">
+        
+        </textarea>
+      </li>
+      <li>
+        <strong>변환1 예) model 용도<strong><br />
+        <textarea id="convertText1" style="width:98%;height:400px;">
+        </textarea>
+      </li>
+      <li>
+        <strong>변환2 예) update 용도<strong><br />
+        <textarea id="convertText2" style="width:98%;height:400px;">
+        </textarea>
+      </li>
+      <li>
+        <strong>변환3 예) vo 용도<strong><br />
+        <textarea id="convertText3" style="width:98%;height:400px;">
+        </textarea>
+      </li>
+      <li>
+        <strong>변환4 예) res 용도<strong><br />
+        <textarea id="convertText4" style="width:98%;height:400px;">
+        </textarea>
+      </li>
+      <li>
+        <strong>변환5 예) res 용도<strong><br />
+        <textarea id="convertText5" style="width:98%;height:400px;">
+        </textarea>
+      </li>
+    </ul>
+	</div>
+</div>
+<script type="text/javascript">
+$("document").ready(function() {
+  $("#orgText").html("AA_NO, AA_NO, AAA, GOODS, PRICE_AMOUNT");
+  
+  setTimeout(function() {
+    convertBtn();
+  }, 100);
+  
+  $("#sampleVo").on("keyup", function(event) {
+    if(event.keyCode == 13) {
+      convertBtn();
+    }
+  });
+});
+
+function convertBtn(){
+  var orgText = $("#orgText").val();
+  var sampleVoNm = $("#sampleVo").val();
+  
+  var convertText = orgText.toLowerCase();  
+  convertText = convertText.replaceAll(" ", "");
+  
+  var convertText2 = "";
+  var convertText3 = "";
+  var convertText4 = "";
+  var convertText5 = "";
+  
+  var splitConvertText1 = convertText.split(",");
+  var splitConvertText2 = convertText.split(",");
+  var splitConvertText3 = convertText.split(",");
+  var splitConvertText4 = convertText.split(",");
+  var splitConvertText5 = convertText.split(",");
+  
+  for (var i=0; i<splitConvertText1.length; i++) {
+    var splitConvertTextJ = splitConvertText1[i].split("_");
+    
+    if(splitConvertTextJ.length > 1) {
+      for(var j=0; j<splitConvertTextJ.length; j++) {
+        if(j > 0) {
+          console.log(splitConvertTextJ[j]);
+          splitConvertTextJ[j] = splitConvertTextJ[j].substr(0,1).toUpperCase() + splitConvertTextJ[j].slice(1);
+        }
+      }
+      splitConvertText1[i] = splitConvertTextJ.join("_").replaceAll("_","");
+    }
+    
+    splitConvertText2[i] = splitConvertText2[i] + " = #{" + splitConvertText1[i] + "}";
+    
+    splitConvertText3[i] = "@Schema(description = \"\")\nprivate String " + splitConvertText1[i] + ";";
+    
+    splitConvertText4[i] = "private String " + splitConvertText1[i] + ";";
+    
+    splitConvertText5[i] = "this." + splitConvertText1[i] + " = " + sampleVoNm + ".get" + splitConvertText1[i].substr(0,1).toUpperCase() + splitConvertText1[i].slice(1) + ";";        
+  }
+  
+  // #convertText1
+  convertText = splitConvertText1.join(",");
+  convertText = convertText.replaceAll(",", "\n,");
+  
+  // #convertText2
+  convertText2 = splitConvertText2.join(",");
+  convertText2 = convertText2.replaceAll(",", "\n,");
+  
+  // #convertText3
+  convertText3 = splitConvertText3.join(",");
+  convertText3 = convertText3.replaceAll(",", "\n\r");  
+  
+  // #convertText4
+  convertText4 = splitConvertText4.join(",");
+  convertText4 = convertText4.replaceAll(",", "\n");
+  
+  // #convertText5
+  convertText5 = splitConvertText5.join(",");
+  convertText5 = convertText5.replaceAll(",", "\n");
+  
+  // var convertText = orgText.toLowerCase();
+  // convertText = convertText.replaceAll(", ", "\n  ,");
+  $("#convertText1").html(convertText);  
+  $("#convertText2").html(convertText2);
+  $("#convertText3").html(convertText3);
+  $("#convertText4").html(convertText4);
+  $("#convertText5").html(convertText5);
+}
+</script>
+</body>
+</html>
