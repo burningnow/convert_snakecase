@@ -10,4 +10,4 @@ snakecase java springboot
 3. 아래 원본 영역에 붙여놓고, 변환 버튼 누르기
  └ 3.1. sampleVoName 입력란을 바꾸면, 반영해서 변환!
 
-sample sit : https://burningnow.com/503
+sample site : https://burningnow.com/503
